@@ -1,0 +1,86 @@
+#使用指令创建数据库
+CREATE DATABASE lzy_db01
+#使用指令删除数据库
+DROP DATABASE lzy_db01
+#创建一个使用utf_8字符集，并带校对规则的lzy_db02数据库
+CREATE DATABASE lzy_db02 CHARACTER SET utf8 COLLATE utf8_bin
+
+SELECT * FROM t1 WHERE NAME = 'tom'
+
+#演示删除和查询数据库
+SHOW DATABASES
+
+SHOW CREATE DATABASE lzy_db01
+
+DROP DATABASE lzy_db02
+
+CREATE TABLE `user` (
+	id INT,
+	`name` VARCHAR(255),
+	`password` VARCHAR(255),
+	birthday DATE)
+	CHARACTER SET utf8 COLLATE utf8_bin ENGINE INNODB;
+	
+CREATE TABLE t2(
+	num1 FLOAT,
+	num2 DOUBLE,
+	num3 DECIMAL(30,20));
+	
+INSERT INTO t2 VALUES(88.12345678912345,88.12345678912345,88.12345678912345);
+SELECT * FROM t2;
+
+CREATE TABLE t3(
+	`name` VARCHAR(256));
+
+DROP TABLE t3;
+
+CREATE TABLE t4(
+	`name` CHAR(4));
+INSERT INTO t4 VALUES('helo');
+SELECT * FROM t4;
+
+CREATE TABLE t5(
+	birthday DATE,
+	job_time DATETIME,
+	login_time TIMESTAMP
+		NOT NULL DEFAULT CURRENT_TIMESTAMP
+		ON UPDATE CURRENT_TIMESTAMP);
+SELECT * FROM t5;
+INSERT INTO t5(birthday,job_time) VALUES('2022-10-10','2022-10-10 09:09:09');
+
+DROP TABLE t5;
+
+#创建表练习
+#创建一个员工表emp(课堂练习)，选用适当的数据类型
+CREATE TABLE emp (
+	id INT,
+	`name` VARCHAR(32),
+	sex CHAR(1),
+	birthday DATE,
+	entry_date DATETIME,
+	job VARCHAR(32),
+	Salary DOUBLE,
+	`resume` TEXT) CHARSET utf8 COLLATE utf8_bin ENGINE INNODB;
+	
+SELECT * FROM emp;
+
+-- 添加一条
+INSERT INTO emp VALUES(100,'张三','男','2022-11-11',
+	'2022-11-11 10:10:10','巡山的',3000,'大王叫我来巡山');
+
+
+#修改表的操作练习
+ALTER TABLE emp ADD image VARCHAR(32) NOT NULL DEFAULT '' AFTER `resume`
+
+DESC emp
+
+ALTER TABLE emp MODIFY job VARCHAR(60) NOT NULL DEFAULT '' 
+
+ALTER TABLE emp DROP sex
+
+RENAME TABLE emp TO employee
+DESC employee
+
+ALTER TABLE employee CHARACTER SET utf8
+
+ALTER TABLE employee CHANGE `name` `user_name` VARCHAR(60) NOT NULL DEFAULT ''
